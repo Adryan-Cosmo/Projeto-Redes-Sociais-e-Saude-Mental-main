@@ -4,7 +4,7 @@
 
 ## Introdução
 
-O presente projeto de pesquisa visa analisar o impacto do uso excessivo das redes sociais na saúde mental dos indivíduos. 
+O presente projeto de pesquisa visa analisar o impacto do uso excessivo das redes sociais na saúde mental dos indivíduos.
 
 A pesquisa se justifica pela crescente relevância do tema no contexto social atual, onde o uso das redes sociais se tornou onipresente e, em muitos casos, excessivo.
 
@@ -12,9 +12,25 @@ A pesquisa se justifica pela crescente relevância do tema no contexto social at
 
 O objetivo principal da pesquisa é identificar os principais impactos do uso excessivo das redes sociais na saúde mental dos indivíduos.
 
+Dessa forma, iremos ao decorrer desse projeto analisar os dados com o intuito de responder os seguintes questionamentos:
+
+**Questionamento Principal:**
+
+1. Qual é o impacto do uso excessivo das redes sociais na saúde mental dos indivíduos?
+
+**Perguntas Complementares:**
+
+2. Quais são os principais sintomas relacionados ao uso excessivo das redes sociais?
+
+3. Existem variáveis demográficas que influenciam o impacto na saúde mental?
+
+4. Qual é a frequência de uso das redes sociais entre os indivíduos analisados?
+
+5. Há uma relação entre o tipo de conteúdo consumido nas redes sociais e os problemas de saúde mental?
+
 ## Metodologia
 
-A pesquisa será realizada com uma amostra de N indivíduos, que serão recrutados através de divulgações do questionário online nas redes sociais.  
+A pesquisa está sendo realizada com uma amostra de N indivíduos, que serão recrutados através de divulgações do questionário online nas redes sociais.  
 Os participantes responderão a um questionário online, composto por 25 perguntas, que abordará os seguintes temas:
 
 - Hábitos de uso das redes sociais;
@@ -25,9 +41,17 @@ O questionário será desenvolvido em uma plataforma online com respostas anôni
 
 ## Status Atual
 
+- Padronização dos Dados 
 - Separação dos dados para validação concluída.
 - Análise exploratória dos dados inicial concluída.
 - Limpeza e Tratamento de Outliers concluída.
+- Analise Univaria e Bivariada concluída.
+
+## Padronização dos Dados
+
+Na observação inicial dos dados, viu-se necessário padronizar e corrigir algumas entradas de dados da nossa base de dados.
+
+Dessa forma, foram criados features simplificadas que representam as perguntas das pesquisas, como também o tratamento de algumas features através do metodo get_dummies, visto que possuiam mais de um valor categorico por feature.
 
 ## Análise de Dados
 
@@ -84,6 +108,24 @@ Início da análise exploratória dos dados das variáveis targets: Ansiedade na
  As demais features como possuem entre 5 a 7 valores categoricos unicos, foi realizado o tratamento dessas features utilizando o metodo **Target Encoding com Validação Cruzada**, no qual consiste numa tecnica de pré-processamento de dados que pode ser utilizada para codificar features categóricas em valores numéricos, levando em consideração a relação entre as features e as variáveis target.
 
  Logo, foram tratados as features `TempoRedesSociais`,`FrequenciaUsoRedes`, `DistraçãoRedes`, `SentimentoComparação`, `BuscaValidação`, `DescriçãoMudançaInteresse`, `MotivaçãoRedução` e `SucessoRedução`. Consequentemente sendo feito o drop dessas features do nosso dataset final.
+
+## Features Engineering
+
+Com base no dados obtidos até o momento, conseguimos ter a capacidade de, ou ao menos tentar, responder algumas das perguntas que fizemos inicialmente no projeto.
+
+Por esse motivo, atráves do método Features Enginnering iremos verificar a correlação que duas ou mais features possuem que nos permitem responder os nossos questinamentos.
+
+Nesse sentido, foram criadas as seguintes features:
+
+- Impacto no Sono = Multiplicar as features `ProblemasSono` e `TempoRedesSociais_encoded`
+- Nível De Distração = Media entre as features `FacilidadeDistração`, `DificuldadeConcentração`, `DistraçãoRedes_encoded`
+- Uso Médio de Redes Sociais = Cálculo do tempo médio gasto em redes sociais utilizando as features `TempoRedesSociais_encoded` e `FrequenciaUsoRedes_encoded`
+
+## Análise Bivariada:
+
+Na etapa da análise bivariada, buscamos identificar as relações que as features da nossa base de dados possui, de modo que, verificamos e corrigimos as features em caso de multicorrelação.
+
+Tendo como foco, a relação das demais variaveis com as nossas variaveis targets, foi observado atráves de heatmaos e da tecnica do sklearn 'SelectKBest' identificamos a variaveis que possuiam maior chance de gerar confusão/ruido no nossos teste de aprendizagem, e logo corrigimos-as.
 
 ## Resultados Esperados
 
